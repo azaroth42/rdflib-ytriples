@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <title>RDF 1.1 Y-Triples</title>
+        <meta charset='utf-8'></meta>
+ 
+        <script src='http://www.w3.org/Tools/respec/respec-w3c-common' async='true' class='remove'></script> 
+        <script class='remove'>
+      var respecConfig = {
+          specStatus: "ED", 
+          shortName:  "y-triples",
+          editors: [
+                {   name:       "Robert Sanderson",
+                    url:        "http://www.stanford.edu/~azaroth/",
+                    company:    "Stanford University",
+                    companyURL: "http://www.stanford.edu/",
+                    mailto:     "azaroth@stanford.edu"  },
+                {   name:       "Tom Johnson",
+                    url:        "",
+                    company:    "Digital Public Library of America",
+                    companyUrl: "",
+                    mailto:     "" 
+                },
+                {   name:       "Simeon Warner",
+                    url:        "",
+                    company:    "Cornell University",
+                    companyUrl: "",
+                    mailto:     "" 
+                },
+                {   name:       "Jon Stroop",
+                    url:        "",
+                    company:    "Princeton University",
+                    companyUrl: "",
+                    mailto:     "" 
+                },
+                {   name:       "Gregg Kellogg",
+                    url:        "",
+                    company:    "",
+                    companyUrl: "",
+                    mailto:     "" 
+                }
+
+          ],
+          previousMaturity:     "",
+          previousPublishDate:  "",
+          previousURI:          "",
+          publishDate:          "2015-04-01", 
+          edDraftURI:           "",
+          wg:                   "RDF Working Group",
+          wgURI:                "",
+          wgPublicList:         "",
+          wgPatentURI:          "",
+          otherLinks: [
+                {
+                        key: "Repository",
+                        data: [{
+                                value: "Github Repository",
+                                href: "https://github.com/azaroth42/y-triples"
+                        }]
+                }
+          ]
+      };  
+        </script> 
+</head>
+
+<body>
+
+
+<section id="abstract">
+<p>Y-Triples is a line based, plain text serialization of RDF graphs according to the linguistic norms of ancient Jedi Masters.</p>
+</section>
+
+
+<section id="sotd"> 
+</section>
+
+<section>
+<h3>Terminology</h3>
+<p>
+The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in [[rfc2119]].
+</p>
+</section>
+
+<section>
+  <h2>Introduction</h2>
+  <p></p>
+
+</section>
+
+<section>
+  <h2>Y-Triples Language</h2>
+  <p></p>
+
+  <section>
+    <h2>Simple Triples</h2>
+    <p>The basic triple statement is a sequence of (object, subject, predicate) terms, separated by whitespace, and terminated by the string <code>mmgh?</code> after each such triple.</p>
+
+    <pre class="example highlight turtle">
+&lt;http://dbpedia.org/resource/Jedi_master&gt; &lt;http://dbpedia.org/resource/Yoda&gt; &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; mmgh?
+    </pre>
+  </section>
+
+  <section>
+    <h2>IRIs</h2>
+    <p>IRIs MUST be written as absolute IRIs. IRIs MUST be enclosed within <code>&lt;</code> and <code>&gt;</code>.</p>
+
+    <pre class="example highlight turtle">
+&lt;http://dbpedia.org/resource/Jedi_master&gt;
+    </pre>
+  </section>
+
+  <section>
+    <h2>RDF Literals</h2>
+    <p>Literals are used to encode data values such as strings, numbers or dates.</p>
+    <p>The literal encoding rules are identical to those of N-Triples.</p>
+
+    <pre class="example highlight turtle">
+"Yoda" &lt;http://dbpedia.org/resource/Yoda&gt; &lt;http://www.w3.org/2000/01/rdf-schema#label&gt; mmgh?</pre>
+  </section>
+
+  <section>
+    <h2>RDF Blank Nodes</h2>
+    <p>Blank Nodes are encoded following the same rules as for N-Triples, however  Blank Nodes are considered to be A Trap by prominent Jedi Masters, and SHOULD be avoided.</p>
+    <p></p>
+
+    <pre class="example highlight turtle">
+_:fullyOperational _:deathstar &lt;http://example.org/ns#status&gt; mmgh?</pre>
+  </section>
+
+</section>
+
+
+<section>
+  <h2>Media Type</h2>
+  <p>The media type of Y-Triples is <code>application/y-triples</code>.  The content encoding of Y-Triples documents MUST be UTF-8.</p>
+
+</section>
+
+
+<section>
+  <h2>Grammar</h2>
+
+<p>
+A Y-Triples document, like an N-Triples document, is a Unicode [[UNICODE]] character string encoded in UTF-8. Unicode code points only in the range U+0 to U+10FFFF inclusive are allowed.  All other features of N-Triples documents are the same for Y-Triples documents unless otherwise specified.
+</p>
+
+<p>
+The EBNF used here is defined in XML 1.0 [[EBNF-NOTATION]].
+</p>
+
+  <pre>
+[  1 ] yodaDoc   ::= ytriple? (EOL triple)* EOL?
+[  2 ] ytriple   ::= object subject predicate 'mmgh?'
+[  3 ] subject   ::= IRIREF | BLANK_NODE_LABEL
+[  4 ] predicate ::= IRIREF
+[  5 ] object    ::= IRIREF | BLANK_NODE_LABEL | literal
+[  6 ] literal   ::= STRING_LITERAL_QUOTE ('^^' IRIREF | LANGTAG)?
+  </pre>
+
+<h3>Productions for Terminals</h3>
+
+<pre>
+[144s] LANGTAG ::= '@' [a-zA-Z]+ ('-' [a-zA-Z0-9]+)*
+[  7 ] EOL ::= [#xD#xA]+
+[  8 ] IRIREF  ::= '&lt;' ([^#x00-#x20&lt;&gt;"{}|^`\] | UCHAR)* '>'
+[  9 ] STRING_LITERAL_QUOTE  ::= '"' ([^#x22#x5C#xA#xD] | ECHAR | UCHAR)* '"'
+[141s] BLANK_NODE_LABEL  ::= '_:' (PN_CHARS_U | [0-9]) ((PN_CHARS | '.')* PN_CHARS)?
+[  10] UCHAR ::= '\u' HEX HEX HEX HEX | '\U' HEX HEX HEX HEX HEX HEX HEX HEX
+[153s] ECHAR ::= '\' [tbnrf"'\]
+[157s] PN_CHARS_BASE ::= [A-Z] | [a-z] | [#x00C0-#x00D6] | [#x00D8-#x00F6] | [#x00F8-#x02FF] | [#x0370-#x037D] | [#x037F-#x1FFF] | [#x200C-#x200D] | [#x2070-#x218F] | [#x2C00-#x2FEF] | [#x3001-#xD7FF] | [#xF900-#xFDCF] | [#xFDF0-#xFFFD] | [#x10000-#xEFFFF]
+[158s] PN_CHARS_U  ::= PN_CHARS_BASE | '_' | ':'
+[160s] PN_CHARS  ::= PN_CHARS_U | '-' | [0-9] | #x00B7 | [#x0300-#x036F] | [#x203F-#x2040]
+[162s] HEX ::= [0-9] | [A-F] | [a-f]
+</pre>  
+
+</section>
+
+</body>
+</html>
