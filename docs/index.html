@@ -18,7 +18,7 @@
                 {   name:       "Tom Johnson",
                     url:        "",
                     company:    "Digital Public Library of America",
-                    companyUrl: "",
+                    companyUrl: "http://dp.la/",
                     mailto:     "" 
                 },
                 {   name:       "Simeon Warner",
@@ -38,6 +38,12 @@
                     company:    "",
                     companyUrl: "",
                     mailto:     "" 
+                },
+                {   name:       "Mark A. Matienzo",
+                    url:        "http://matienzo.org/",
+                    company:    "Digital Public Library of America",
+                    companyUrl: "http://dp.la/",
+                    mailto:     "mark@matienzo.org" 
                 }
 
           ],
@@ -112,7 +118,7 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "S
   <section>
     <h2>RDF Literals</h2>
     <p>Literals are used to encode data values such as strings, numbers or dates.</p>
-    <p>The literal encoding rules are identical to those of N-Triples.</p>
+    <p>The literal encoding rules are identical to those of N-Triples [[N-TRIPLES]].</p>
 
     <pre class="example highlight turtle">
 "Yoda" &lt;http://dbpedia.org/resource/Yoda&gt; &lt;http://www.w3.org/2000/01/rdf-schema#label&gt; mmgh?</pre>
@@ -120,7 +126,7 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "S
 
   <section>
     <h2>RDF Blank Nodes</h2>
-    <p>Blank Nodes are encoded following the same rules as for N-Triples, however  Blank Nodes are considered to be A Trap by prominent Jedi Masters, and SHOULD be avoided.</p>
+    <p>Blank Nodes are encoded following the same rules as for N-Triples [[N-TRIPLES]], however  Blank Nodes are considered to be A Trap by prominent Jedi Masters, and SHOULD be avoided.</p>
     <p></p>
 
     <pre class="example highlight turtle">
@@ -141,7 +147,7 @@ _:fullyOperational _:deathstar &lt;http://example.org/ns#status&gt; mmgh?</pre>
   <h2>Grammar</h2>
 
 <p>
-A Y-Triples document, like an N-Triples document, is a Unicode [[UNICODE]] character string encoded in UTF-8. Unicode code points only in the range U+0 to U+10FFFF inclusive are allowed.  All other features of N-Triples documents are the same for Y-Triples documents unless otherwise specified.
+A Y-Triples document, like an N-Triples [[N-TRIPLES]] document, is a Unicode [[UNICODE]] character string encoded in UTF-8. Unicode code points only in the range U+0 to U+10FFFF inclusive are allowed.  All other features of N-Triples [[N-TRIPLES]] documents are the same for Y-Triples documents unless otherwise specified.
 </p>
 
 <p>
