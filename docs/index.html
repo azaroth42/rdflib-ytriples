@@ -155,7 +155,7 @@ The EBNF used here is defined in XML 1.0 [[EBNF-NOTATION]].
 </p>
 
   <pre>
-[  1 ] yodaDoc   ::= ytriple? (EOL triple)* EOL?
+[  1 ] yodaDoc   ::= ytriple? (EOL ytriple)* EOL?
 [  2 ] ytriple   ::= object subject predicate 'mmgh?'
 [  3 ] subject   ::= IRIREF | BLANK_NODE_LABEL
 [  4 ] predicate ::= IRIREF
